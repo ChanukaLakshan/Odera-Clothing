@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odera Clothing | Modern Fashion for Young Adults</title>
+    <meta name="description" content="Discover trendy girls' fashion and minimalist men's wear at Odera Clothing. Premium quality, affordable prices, and modern style.">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header id="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo"><img src="images/logo.png" alt="Odera Clothing" style="height: 60px; margin-top: -5px;"></a>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html" class="active">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            
+            <div class="nav-icons">
+                <button class="icon-btn search-btn" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button class="icon-btn wishlist-btn" aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
+                <a href="cart.html" class="icon-btn cart-btn" aria-label="Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count">2</span>
+                </a>
+                <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero fade-in">
+        <img src="images/hero_banner.png" alt="Odera Clothing Fashion Banner" class="hero-bg">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Elevate Your Everyday Style</h1>
+            <p>Discover the latest trends in girls' fashion. Elegant, minimal, and confidently you.</p>
+            <a href="shop.html" class="btn btn-primary">Shop New Arrivals</a>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="section-padding container fade-in">
+        <div class="product-grid" style="grid-template-columns: repeat(2, 1fr); gap: 2rem;">
+            <div class="product-image-wrapper" style="aspect-ratio: 4/5; position: relative; border-radius: 8px; overflow: hidden;">
+                <img src="images/product_dress_1.png" alt="Women's Collection">
+                <div style="position: absolute; bottom: 20px; left: 20px; text-align: left; color: #fff;">
+                    <h3 style="font-size: 2rem; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Women</h3>
+                    <a href="shop.html?category=women" class="btn btn-primary" style="margin-top: 10px; background: rgba(255,255,255,0.9); color: black;">Explore</a>
+                </div>
+            </div>
+            <div class="product-image-wrapper" style="aspect-ratio: 4/5; position: relative; border-radius: 8px; overflow: hidden;">
+                <img src="images/product_mens_1.png" alt="Men's Collection">
+                <div style="position: absolute; bottom: 20px; left: 20px; text-align: left; color: #fff;">
+                    <h3 style="font-size: 2rem; color: #fff; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Men</h3>
+                    <a href="shop.html?category=men" class="btn btn-primary" style="margin-top: 10px; background: rgba(255,255,255,0.9); color: black;">Explore</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Arrivals -->
+    <section class="section-padding container fade-in">
+        <div class="section-title">
+            <h2>New Arrivals</h2>
+            <p style="color: var(--color-text-muted);">Trending pieces curated just for you.</p>
+        </div>
+        
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="images/product_dress_1.png" alt="Pastel Pink Summer Dress">
+                    <div class="product-actions">
+                        <button class="btn-icon" aria-label="Add to Wishlist"><i class="fa-regular fa-heart"></i></button>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Dresses</p>
+                    <a href="product.html"><h3 class="product-title">Pastel Pink Summer Dress</h3></a>
+                    <p class="product-price">$59.00</p>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="images/product_top_1.png" alt="White Crop Top">
+                    <div class="product-actions">
+                        <button class="btn-icon" aria-label="Add to Wishlist"><i class="fa-regular fa-heart"></i></button>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Tops</p>
+                    <a href="product.html"><h3 class="product-title">Elegant White Crop Top</h3></a>
+                    <p class="product-price">$35.00</p>
+                </div>
+            </div>
+            
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="images/product_mens_1.png" alt="Minimalist Black T-Shirt">
+                    <div class="product-actions">
+                        <button class="btn-icon" aria-label="Add to Wishlist"><i class="fa-regular fa-heart"></i></button>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Men's Basics</p>
+                    <a href="product.html"><h3 class="product-title">Minimalist Black T-Shirt</h3></a>
+                    <p class="product-price">$28.00</p>
+                </div>
+            </div>
+
+            <!-- Product 4 placeholder -->
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <div style="width: 100%; height: 100%; background: #eaeaea; display:flex; align-items:center; justify-content:center;">
+                        <span style="color: #999;">Image Coming Soon</span>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-icon" aria-label="Add to Wishlist"><i class="fa-regular fa-heart"></i></button>
+                        <button class="btn-add-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <p class="product-category">Outerwear</p>
+                    <a href="product.html"><h3 class="product-title">Beige Trench Coat</h3></a>
+                    <p class="product-price">$89.00</p>
+                </div>
+            </div>
+        </div>
+        <div class="text-center" style="margin-top: 2rem;">
+            <a href="shop.html" class="btn btn-secondary">View All Products</a>
+        </div>
+    </section>
+
+    <!-- Promotional Section -->
+    <section class="promo-banner fade-in">
+        <div class="container">
+            <h2>Spring Collection Flash Sale</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; color: #333;">Get 20% off on all new arrivals. Use code: <strong>SPRING20</strong></p>
+            <a href="shop.html" class="btn btn-primary" style="background-color: var(--color-primary); color: white;">Shop the Sale</a>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials fade-in">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Customers Say</h2>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p>"Absolutely in love with the quality and fit. The pastel dress feels so premium yet affordable!"</p>
+                    <h4 style="margin-top: 1rem;">- Sarah J.</h4>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+                    <p>"Minimalist and trendy. Odera is my new go-to brand for everyday wear."</p>
+                    <h4 style="margin-top: 1rem;">- Emily R.</h4>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p>"The mens collection is limited but fits perfectly. Love the clean aesthetic."</p>
+                    <h4 style="margin-top: 1rem;">- Mark D.</h4>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col" style="flex: 2;">
+                    <a href="index.html" class="logo" style="color: white;">Odera</a>
+                    <p style="color: #aaa; margin-top: 1rem; max-width: 300px;">Modern, elegant, and minimal fashion designed to make you feel confident every day.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="shop.html?category=new">New Arrivals</a></li>
+                        <li><a href="shop.html?category=women">Women</a></li>
+                        <li><a href="shop.html?category=men">Men</a></li>
+                        <li><a href="shop.html?category=sale">Sale</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Shipping & Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p style="color: #aaa; margin-bottom: 1rem; font-size: 0.9rem;">Subscribe to receive updates, access to exclusive deals, and more.</p>
+                    <form style="display: flex; gap: 0.5rem;" onsubmit="event.preventDefault(); alert('Subscribed!');">
+                        <input type="email" placeholder="Enter your email" required style="padding: 0.5rem; width: 100%; border: none; border-radius: 4px;">
+                        <button type="submit" class="btn btn-primary" style="padding: 0.5rem 1rem; background-color: var(--color-secondary); color: var(--color-primary); font-weight: bold; border-radius: 4px;">Subscribe</button>
+                    </form>
+                    <div class="social-links" style="margin-top: 1.5rem;">
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+                        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Odera Clothing. All rights reserved. Designed with style.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+</body>
+</html>
+

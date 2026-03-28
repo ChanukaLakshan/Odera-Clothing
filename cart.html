@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | Odera Clothing</title>
+    <meta name="description" content="Review your shopping cart at Odera Clothing.">
+    
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .page-header {
+            padding: calc(var(--spacing-xl) + 60px) 0 var(--spacing-xl);
+            background-color: var(--color-beige);
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .cart-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--spacing-xl);
+            padding: var(--spacing-xl) var(--spacing-md);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .cart-items {
+            width: 100%;
+        }
+
+        .cart-header {
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr 1fr;
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 2px solid #eaeaea;
+            font-weight: 600;
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr 1fr;
+            align-items: center;
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid #eaeaea;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .product-col {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .product-col img {
+            width: 80px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: var(--border-radius-sm);
+        }
+
+        .item-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+            color: var(--color-primary);
+        }
+
+        .item-info .item-meta {
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+            margin-bottom: 8px;
+        }
+
+        .remove-btn {
+            color: var(--color-accent);
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: underline;
+            transition: color var(--transition-fast);
+        }
+
+        .remove-btn:hover {
+            color: #b30000;
+        }
+
+        .qty-controls {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius-sm);
+            width: fit-content;
+        }
+
+        .qty-btn {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color var(--transition-fast);
+        }
+
+        .qty-btn:hover {
+            background-color: #f5f5f5;
+        }
+
+        .qty-input {
+            width: 40px;
+            text-align: center;
+            border: none;
+            font-family: var(--font-body);
+            font-weight: 500;
+            -moz-appearance: textfield;
+        }
+
+        .qty-input::-webkit-outer-spin-button,
+        .qty-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .total-col {
+            font-weight: 600;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background-color: #fafafa;
+            padding: var(--spacing-lg);
+            border-radius: var(--border-radius-md);
+            border: 1px solid #eaeaea;
+            height: fit-content;
+        }
+
+        .order-summary h3 {
+            font-size: 1.5rem;
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-sm);
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.05rem;
+        }
+
+        .summary-row.total {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-top: var(--spacing-md);
+            padding-top: var(--spacing-md);
+            border-top: 1px solid #eaeaea;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            margin-top: var(--spacing-lg);
+            padding: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .continue-shopping {
+            display: block;
+            text-align: center;
+            margin-top: var(--spacing-md);
+            color: var(--color-text-muted);
+            font-size: 0.95rem;
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .cart-container {
+                grid-template-columns: 1fr;
+            }
+            .cart-header {
+                display: none;
+            }
+            .cart-item {
+                grid-template-columns: 1fr;
+                gap: var(--spacing-md);
+            }
+            .product-col {
+                width: 100%;
+            }
+            .price-col, .qty-col, .total-col {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            }
+            .price-col::before { content: "Price: "; font-weight: 500;}
+            .qty-col::before { content: "Quantity: "; font-weight: 500;}
+            .total-col::before { content: "Total: "; font-weight: 500;}
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header id="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo"><img src="images/logo.png" alt="Odera Clothing" style="height: 60px; margin-top: -5px;"></a>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            
+            <div class="nav-icons">
+                <button class="icon-btn search-btn" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button class="icon-btn wishlist-btn" aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
+                <a href="cart.html" class="icon-btn cart-btn active" aria-label="Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count">2</span>
+                </a>
+                <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header fade-in">
+        <div class="container">
+            <h1>Your Cart</h1>
+        </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section class="fade-in">
+        <div class="cart-container">
+            
+            <!-- Cart Items -->
+            <div class="cart-items" id="cartItemsContainer">
+                <div class="cart-header">
+                    <div>Product</div>
+                    <div>Price</div>
+                    <div>Quantity</div>
+                    <div>Total</div>
+                </div>
+
+                <!-- Item 1 -->
+                <div class="cart-item" id="item-1">
+                    <div class="product-col">
+                        <img src="images/product_dress_1.png" alt="Pastel Pink Summer Dress">
+                        <div class="item-info">
+                            <a href="product.html"><h4>Pastel Pink Summer Dress</h4></a>
+                            <div class="item-meta">Color: Pink | Size: S</div>
+                            <span class="remove-btn" onclick="removeItem('item-1', 59.00)">Remove</span>
+                        </div>
+                    </div>
+                    <div class="price-col">$<span class="item-price">59.00</span></div>
+                    <div class="qty-col">
+                        <div class="qty-controls">
+                            <button class="qty-btn" onclick="updateQty('item-1', -1, 59.00)"><i class="fa-solid fa-minus" style="font-size: 0.7rem;"></i></button>
+                            <input type="number" class="qty-input" value="1" min="1" readonly>
+                            <button class="qty-btn" onclick="updateQty('item-1', 1, 59.00)"><i class="fa-solid fa-plus" style="font-size: 0.7rem;"></i></button>
+                        </div>
+                    </div>
+                    <div class="total-col">$<span class="item-total">59.00</span></div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="cart-item" id="item-2">
+                    <div class="product-col">
+                        <img src="images/product_top_1.png" alt="Elegant White Crop Top">
+                        <div class="item-info">
+                            <a href="product.html"><h4>Elegant White Crop Top</h4></a>
+                            <div class="item-meta">Color: White | Size: M</div>
+                            <span class="remove-btn" onclick="removeItem('item-2', 35.00)">Remove</span>
+                        </div>
+                    </div>
+                    <div class="price-col">$<span class="item-price">35.00</span></div>
+                    <div class="qty-col">
+                        <div class="qty-controls">
+                            <button class="qty-btn" onclick="updateQty('item-2', -1, 35.00)"><i class="fa-solid fa-minus" style="font-size: 0.7rem;"></i></button>
+                            <input type="number" class="qty-input" value="1" min="1" readonly>
+                            <button class="qty-btn" onclick="updateQty('item-2', 1, 35.00)"><i class="fa-solid fa-plus" style="font-size: 0.7rem;"></i></button>
+                        </div>
+                    </div>
+                    <div class="total-col">$<span class="item-total">35.00</span></div>
+                </div>
+
+            </div>
+
+            <!-- Order Summary -->
+            <div class="order-summary" id="orderSummary">
+                <h3>Order Summary</h3>
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span>$<span id="cartSubtotal">94.00</span></span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping</span>
+                    <span>Calculated at checkout</span>
+                </div>
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span>$<span id="cartTotal">94.00</span></span>
+                </div>
+                <button class="btn btn-primary checkout-btn" onclick="alert('Proceeding to checkout sequence...')">Checkout <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
+                <a href="shop.html" class="continue-shopping">Continue Shopping</a>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col" style="flex: 2;">
+                    <a href="index.html" class="logo" style="color: white;">Odera</a>
+                    <p style="color: #aaa; margin-top: 1rem; max-width: 300px;">Modern, elegant, and minimal fashion designed to make you feel confident every day.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="shop.html?category=new">New Arrivals</a></li>
+                        <li><a href="shop.html?category=women">Women</a></li>
+                        <li><a href="shop.html?category=men">Men</a></li>
+                        <li><a href="shop.html?category=sale">Sale</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Shipping & Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Odera Clothing. All rights reserved. Designed with style.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        function updateCartCount() {
+            const items = document.querySelectorAll('.cart-item').length;
+            const countEl = document.querySelector('.cart-count');
+            if(countEl) countEl.textContent = items;
+            
+            if(items === 0) {
+                document.getElementById('cartItemsContainer').innerHTML = '<p style="text-align: center; padding: 2rem;">Your cart is currently empty.</p>';
+                document.getElementById('orderSummary').style.opacity = '0.5';
+                document.getElementById('orderSummary').style.pointerEvents = 'none';
+            }
+        }
+
+        function recalcCart() {
+            let total = 0;
+            document.querySelectorAll('.cart-item').forEach(item => {
+                const itemTotal = parseFloat(item.querySelector('.item-total').textContent);
+                total += itemTotal;
+            });
+            document.getElementById('cartSubtotal').textContent = total.toFixed(2);
+            document.getElementById('cartTotal').textContent = total.toFixed(2);
+        }
+
+        function updateQty(itemId, change, price) {
+            const item = document.getElementById(itemId);
+            const input = item.querySelector('.qty-input');
+            let newQty = parseInt(input.value) + change;
+            if(newQty < 1) newQty = 1;
+            
+            input.value = newQty;
+            item.querySelector('.item-total').textContent = (newQty * price).toFixed(2);
+            recalcCart();
+        }
+
+        function removeItem(itemId, price) {
+            const item = document.getElementById(itemId);
+            item.style.opacity = '0';
+            setTimeout(() => {
+                item.remove();
+                recalcCart();
+                updateCartCount();
+            }, 300);
+        }
+    </script>
+</body>
+</html>
+

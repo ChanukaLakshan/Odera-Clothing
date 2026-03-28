@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | Odera Clothing</title>
+    <meta name="description" content="Shop the latest trends in girls' fashion and minimalist men's wear at Odera Clothing.">
+    
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .page-header {
+            padding: calc(var(--spacing-xl) + 60px) 0 var(--spacing-xl);
+            background-color: var(--color-beige);
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .shop-container {
+            display: flex;
+            gap: var(--spacing-xl);
+            padding: var(--spacing-xl) var(--spacing-md);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .sidebar {
+            width: 250px;
+            flex-shrink: 0;
+        }
+        
+        .filter-group {
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid #eaeaea;
+        }
+        
+        .filter-title {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-sm);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .filter-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+        }
+        
+        .filter-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+            cursor: pointer;
+        }
+        
+        .filter-item input {
+            accent-color: var(--color-primary);
+        }
+        
+        .shop-main {
+            flex-grow: 1;
+        }
+        
+        .shop-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .sort-select {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius-sm);
+            font-family: var(--font-body);
+        }
+        
+        /* Sizes */
+        .size-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-xs);
+        }
+        
+        .size-box {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: var(--spacing-xs);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border-radius: var(--border-radius-sm);
+        }
+        
+        .size-box:hover, .size-box.selected {
+            border-color: var(--color-primary);
+            background-color: var(--color-primary);
+            color: var(--color-surface);
+        }
+
+        @media (max-width: 768px) {
+            .shop-container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
+            .mobile-filter-btn {
+                display: block;
+                width: 100%;
+                margin-bottom: var(--spacing-md);
+            }
+            .sidebar-content {
+                display: none;
+            }
+            .sidebar-content.open {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header id="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo"><img src="images/logo.png" alt="Odera Clothing" style="height: 60px; margin-top: -5px;"></a>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="shop.html" class="active">Shop</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            
+            <div class="nav-icons">
+                <button class="icon-btn search-btn" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button class="icon-btn wishlist-btn" aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
+                <a href="cart.html" class="icon-btn cart-btn" aria-label="Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count">2</span>
+                </a>
+                <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header fade-in">
+        <div class="container">
+            <h1>Our Collection</h1>
+            <p>From everyday essentials to statement pieces.</p>
+        </div>
+    </section>
+
+    <!-- Shop Content -->
+    <section class="shop-container fade-in">
+        <!-- Sidebar Filters -->
+        <aside class="sidebar">
+            <button class="btn btn-secondary mobile-filter-btn" style="display: none;" id="filterBtn">Show Filters</button>
+            <div class="sidebar-content" id="sidebarContent">
+                
+                <div class="filter-group">
+                    <div class="filter-title">Category <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="filter-list">
+                        <label class="filter-item">
+                            <input type="checkbox" checked> All
+                        </label>
+                        <label class="filter-item">
+                            <input type="checkbox"> Dresses
+                        </label>
+                        <label class="filter-item">
+                            <input type="checkbox"> Tops
+                        </label>
+                        <label class="filter-item">
+                            <input type="checkbox"> Bottoms
+                        </label>
+                        <label class="filter-item">
+                            <input type="checkbox"> Outerwear
+                        </label>
+                        <label class="filter-item">
+                            <input type="checkbox"> Men's Wear
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <div class="filter-title">Price <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="filter-list">
+                        <label class="filter-item">
+                            <input type="checkbox"> Under $30
+                        </label>
+                        <label class="filter-item">
+                            <input type="checkbox"> $30 - $60
+                        </label>
+                        <label class="filter-item">
+                            <input type="checkbox"> $60 - $100
+                        </label>
+                        <label class="filter-item">
+                            <input type="checkbox"> Over $100
+                        </label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <div class="filter-title">Size <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="size-grid" style="margin-top: 10px;">
+                        <div class="size-box">XS</div>
+                        <div class="size-box selected">S</div>
+                        <div class="size-box">M</div>
+                        <div class="size-box">L</div>
+                        <div class="size-box">XL</div>
+                        <div class="size-box">XXL</div>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" style="width: 100%;">Apply Filters</button>
+            </div>
+        </aside>
+
+        <!-- Main Product Grid -->
+        <main class="shop-main">
+            <div class="shop-toolbar">
+                <p>Showing 1-9 of 24 results</p>
+                <div>
+                    <select class="sort-select" aria-label="Sort products">
+                        <option value="default">Default Sorting</option>
+                        <option value="popularity">Sort by Popularity</option>
+                        <option value="newness">Sort by Newness</option>
+                        <option value="price-low">Sort by Price: Low to High</option>
+                        <option value="price-high">Sort by Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="product-grid" style="grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <img src="images/product_dress_1.png" alt="Pastel Pink Summer Dress">
+                        <div class="product-actions">
+                            <button class="btn-icon" aria-label="Add to Wishlist"><i class="fa-regular fa-heart"></i></button>
+                            <button class="btn-add-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-category">Dresses</p>
+                        <a href="product.html"><h3 class="product-title">Pastel Pink Summer Dress</h3></a>
+                        <p class="product-price">$59.00</p>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <img src="images/product_top_1.png" alt="Elegant White Crop Top">
+                        <div class="product-actions">
+                            <button class="btn-icon" aria-label="Add to Wishlist"><i class="fa-regular fa-heart"></i></button>
+                            <button class="btn-add-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-category">Tops</p>
+                        <a href="product.html"><h3 class="product-title">Elegant White Crop Top</h3></a>
+                        <p class="product-price">$35.00</p>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <img src="images/product_mens_1.png" alt="Minimalist Black T-Shirt">
+                        <div class="product-actions">
+                            <button class="btn-icon" aria-label="Add to Wishlist"><i class="fa-regular fa-heart"></i></button>
+                            <button class="btn-add-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-category">Men's Basics</p>
+                        <a href="product.html"><h3 class="product-title">Minimalist Black T-Shirt</h3></a>
+                        <p class="product-price">$28.00</p>
+                    </div>
+                </div>
+
+                <!-- Product 4 placeholder -->
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <div style="width: 100%; height: 100%; background: #eaeaea;"></div>
+                        <div class="product-actions">
+                            <button class="btn-icon" aria-label="Add to Wishlist"><i class="fa-regular fa-heart"></i></button>
+                            <button class="btn-add-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-category">Outerwear</p>
+                        <a href="product.html"><h3 class="product-title">Beige Trench Coat</h3></a>
+                        <p class="product-price">$89.00</p>
+                    </div>
+                </div>
+                
+                <!-- Product 5 placeholder -->
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <div style="width: 100%; height: 100%; background: #fdfafa;"></div>
+                        <div class="product-actions">
+                            <button class="btn-icon" aria-label="Add to Wishlist"><i class="fa-regular fa-heart"></i></button>
+                            <button class="btn-add-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-category">Bottoms</p>
+                        <a href="product.html"><h3 class="product-title">Classic Wide Leg Pants</h3></a>
+                        <p class="product-price">$45.00</p>
+                    </div>
+                </div>
+
+                <!-- Product 6 placeholder -->
+                <div class="product-card">
+                    <div class="product-image-wrapper">
+                        <div style="width: 100%; height: 100%; background: #fdfdfd;"></div>
+                        <div class="product-actions">
+                            <button class="btn-icon" aria-label="Add to Wishlist"><i class="fa-regular fa-heart"></i></button>
+                            <button class="btn-add-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <p class="product-category">Tops</p>
+                        <a href="product.html"><h3 class="product-title">Ribbed Knit Sweater</h3></a>
+                        <p class="product-price">$52.00</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center" style="margin-top: 3rem;">
+                <button class="btn btn-secondary">Load More</button>
+            </div>
+        </main>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col" style="flex: 2;">
+                    <a href="index.html" class="logo" style="color: white;">Odera</a>
+                    <p style="color: #aaa; margin-top: 1rem; max-width: 300px;">Modern, elegant, and minimal fashion designed to make you feel confident every day.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="shop.html?category=new">New Arrivals</a></li>
+                        <li><a href="shop.html?category=women">Women</a></li>
+                        <li><a href="shop.html?category=men">Men</a></li>
+                        <li><a href="shop.html?category=sale">Sale</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Shipping & Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p style="color: #aaa; margin-bottom: 1rem; font-size: 0.9rem;">Subscribe to receive updates, access to exclusive deals, and more.</p>
+                    <form style="display: flex; gap: 0.5rem;" onsubmit="event.preventDefault(); alert('Subscribed!');">
+                        <input type="email" placeholder="Enter your email" required style="padding: 0.5rem; width: 100%; border: none; border-radius: 4px;">
+                        <button type="submit" class="btn btn-primary" style="padding: 0.5rem 1rem; background-color: var(--color-secondary); color: var(--color-primary); font-weight: bold; border-radius: 4px;">Subscribe</button>
+                    </form>
+                    <div class="social-links" style="margin-top: 1.5rem;">
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+                        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Odera Clothing. All rights reserved. Designed with style.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterBtn = document.getElementById('filterBtn');
+            const sidebarContent = document.getElementById('sidebarContent');
+            
+            if (filterBtn && sidebarContent) {
+                filterBtn.addEventListener('click', () => {
+                    sidebarContent.classList.toggle('open');
+                    filterBtn.textContent = sidebarContent.classList.contains('open') ? 'Hide Filters' : 'Show Filters';
+                });
+            }
+
+            // Size selection
+            const sizeBoxes = document.querySelectorAll('.size-box');
+            sizeBoxes.forEach(box => {
+                box.addEventListener('click', () => {
+                    box.classList.toggle('selected');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pastel Pink Summer Dress | Odera Clothing</title>
+    <meta name="description" content="Trendy pastel pink summer dress. Elegant, comfortable and perfect for warm weather.">
+    
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .product-details-container {
+            padding: calc(var(--spacing-xl) + 60px) var(--spacing-md) var(--spacing-xl);
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-xl);
+        }
+
+        .product-gallery {
+            display: flex;
+            gap: var(--spacing-md);
+        }
+
+        .gallery-thumbnails {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-sm);
+            width: 80px;
+        }
+
+        .thumbnail {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: var(--transition-fast);
+        }
+
+        .thumbnail.active {
+            border-color: var(--color-primary);
+        }
+
+        .gallery-main {
+            flex-grow: 1;
+        }
+
+        .gallery-main img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            border-radius: var(--border-radius-sm);
+        }
+
+        .product-info-details h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .price-rating {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .price {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .stars {
+            color: #FFB300;
+            font-size: 0.9rem;
+        }
+
+        .description {
+            color: var(--color-text-muted);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.8;
+        }
+
+        .selector-group {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .selector-label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .size-selector {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .size-btn {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border-radius: var(--border-radius-sm);
+        }
+
+        .size-btn:hover, .size-btn.active {
+            border-color: var(--color-primary);
+            background-color: var(--color-primary);
+            color: var(--color-surface);
+        }
+
+        .color-selector {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .color-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            outline: 1px solid #ddd;
+            outline-offset: 2px;
+        }
+
+        .color-btn.active {
+            outline-color: var(--color-primary);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .action-buttons .btn-primary {
+            flex-grow: 1;
+            padding: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .action-buttons .btn-icon {
+            width: 55px;
+            height: 55px;
+            font-size: 1.5rem;
+            border: 1px solid #ddd;
+            background-color: transparent;
+            box-shadow: none;
+        }
+        
+        .action-buttons .btn-icon:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background-color: transparent;
+        }
+
+        .action-buttons .btn-icon.active i {
+            color: var(--color-accent);
+        }
+
+        .product-meta {
+            border-top: 1px solid #eaeaea;
+            padding-top: var(--spacing-md);
+            font-size: 0.9rem;
+            color: var(--color-text-muted);
+        }
+
+        .product-meta p {
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .product-meta span {
+            color: var(--color-primary);
+            font-weight: 500;
+        }
+
+        /* Tabs */
+        .tabs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md) var(--spacing-xl);
+        }
+
+        .tabs-header {
+            display: flex;
+            gap: var(--spacing-lg);
+            border-bottom: 1px solid #eaeaea;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .tab-btn {
+            padding: var(--spacing-sm) 0;
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--color-text-muted);
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab-btn.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+        }
+
+        .tab-content {
+            display: none;
+            color: var(--color-text-muted);
+            line-height: 1.8;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .product-details-container {
+                grid-template-columns: 1fr;
+            }
+            .product-gallery {
+                flex-direction: column-reverse;
+            }
+            .gallery-thumbnails {
+                flex-direction: row;
+                width: 100%;
+            }
+            .thumbnail {
+                width: 80px;
+                height: 80px;
+                aspect-ratio: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header id="header">
+        <div class="container nav-container">
+            <a href="index.html" class="logo"><img src="images/logo.png" alt="Odera Clothing" style="height: 60px; margin-top: -5px;"></a>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+                <a href="about.html">About Us</a>
+                <a href="contact.html">Contact</a>
+            </nav>
+            
+            <div class="nav-icons">
+                <button class="icon-btn search-btn" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button class="icon-btn wishlist-btn" aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
+                <a href="cart.html" class="icon-btn cart-btn" aria-label="Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="cart-count">2</span>
+                </a>
+                <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Product Details -->
+    <section class="product-details-container fade-in">
+        <!-- Gallery -->
+        <div class="product-gallery">
+            <div class="gallery-thumbnails">
+                <img src="images/product_dress_1.png" alt="Thumbnail 1" class="thumbnail active" onclick="changeImage(this.src)">
+                <img src="images/product_dress_1.png" alt="Thumbnail 2" class="thumbnail" onclick="changeImage(this.src)" style="filter: brightness(0.9);">
+                <img src="images/product_dress_1.png" alt="Thumbnail 3" class="thumbnail" onclick="changeImage(this.src)" style="filter: brightness(0.8);">
+            </div>
+            <div class="gallery-main">
+                <img src="images/product_dress_1.png" alt="Pastel Pink Summer Dress" id="mainImage">
+            </div>
+        </div>
+
+        <!-- Info -->
+        <div class="product-info-details">
+            <p class="product-category" style="margin-bottom: 10px;">Dresses</p>
+            <h1>Pastel Pink Summer Dress</h1>
+            
+            <div class="price-rating">
+                <div class="price">$59.00</div>
+                <div class="stars">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                    <span style="color: var(--color-text-muted); margin-left: 5px;">(15 Reviews)</span>
+                </div>
+            </div>
+
+            <p class="description">
+                Elevate your summer wardrobe with this stunning pastel pink summer dress. Designed with a flattering silhouette and crafted from breathable, lightweight fabric, it's perfect for both casual outings and elegant evening events. Embrace confidence and modern style effortlessly.
+            </p>
+
+            <div class="selector-group">
+                <span class="selector-label">Color</span>
+                <div class="color-selector">
+                    <div class="color-btn active" style="background-color: var(--color-secondary);"></div>
+                    <div class="color-btn" style="background-color: #FFFFFF; border: 1px solid #eee;"></div>
+                    <div class="color-btn" style="background-color: #000000;"></div>
+                </div>
+            </div>
+
+            <div class="selector-group">
+                <span class="selector-label">Size <a href="#" style="float: right; font-weight: normal; font-size: 0.9rem; text-decoration: underline;">Size Guide</a></span>
+                <div class="size-selector">
+                    <div class="size-btn">XS</div>
+                    <div class="size-btn active">S</div>
+                    <div class="size-btn">M</div>
+                    <div class="size-btn">L</div>
+                    <div class="size-btn">XL</div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="btn btn-primary btn-add-cart-large">Add to Cart</button>
+                <button class="btn-icon wishlist-btn-large" aria-label="Add to Wishlist"><i class="fa-regular fa-heart"></i></button>
+            </div>
+
+            <div class="product-meta">
+                <p>SKU: <span>OD-DRESS-PINKS-01</span></p>
+                <p>Category: <span>Women, Dresses</span></p>
+                <p>Tags: <span>Summer, Elegant, Trendy, Pink</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tabs for extra info -->
+    <section class="tabs-container fade-in">
+        <div class="tabs-header">
+            <button class="tab-btn active" onclick="openTab('desc')">Description</button>
+            <button class="tab-btn" onclick="openTab('info')">Additional Information</button>
+            <button class="tab-btn" onclick="openTab('reviews')">Reviews (15)</button>
+        </div>
+        
+        <div id="desc" class="tab-content active">
+            <p>This premium pastel pink dress is a staple for young, fashion-conscious women who value minimal elegance. Designed in our modern boutique studio, it incorporates smooth lines and subtle flair. The soft fabric ensures all-day comfort while maintaining a chic structure.</p>
+        </div>
+        <div id="info" class="tab-content">
+            <p><strong>Material:</strong> 95% Cotton, 5% Elastane</p>
+            <p><strong>Care Instructions:</strong> Machine wash cold, gentle cycle. Do not bleach. Hang to dry. Iron on low heat if necessary.</p>
+            <p><strong>Fit:</strong> True to size.</p>
+        </div>
+        <div id="reviews" class="tab-content">
+            <p><strong>Sarah J.</strong> - <i class="fa-solid fa-star" style="color: #FFB300;"></i><i class="fa-solid fa-star" style="color: #FFB300;"></i><i class="fa-solid fa-star" style="color: #FFB300;"></i><i class="fa-solid fa-star" style="color: #FFB300;"></i><i class="fa-solid fa-star" style="color: #FFB300;"></i></p>
+            <p>"Absolutely perfect! The color is stunning and the fit is amazing."</p>
+            <br>
+            <p><strong>Jessica T.</strong> - <i class="fa-solid fa-star" style="color: #FFB300;"></i><i class="fa-solid fa-star" style="color: #FFB300;"></i><i class="fa-solid fa-star" style="color: #FFB300;"></i><i class="fa-solid fa-star" style="color: #FFB300;"></i><i class="fa-regular fa-star" style="color: #FFB300;"></i></p>
+            <p>"Great quality fabric, looks very premium. A bit long for me but easy to tailor."</p>
+        </div>
+    </section>
+
+    <!-- Related Products -->
+    <section class="section-padding container fade-in" style="padding-top: 0;">
+        <div class="section-title">
+            <h2>You May Also Like</h2>
+        </div>
+        <div class="product-grid" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="product-card">
+                <div class="product-image-wrapper">
+                    <img src="images/product_top_1.png" alt="Elegant White Crop Top">
+                </div>
+                <div class="product-info">
+                    <a href="product.html"><h3 class="product-title">Elegant White Crop Top</h3></a>
+                    <p class="product-price">$35.00</p>
+                </div>
+            </div>
+            <!-- More related placeholders could go here -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col" style="flex: 2;">
+                    <a href="index.html" class="logo" style="color: white;">Odera</a>
+                    <p style="color: #aaa; margin-top: 1rem; max-width: 300px;">Modern, elegant, and minimal fashion designed to make you feel confident every day.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Shop</h3>
+                    <ul>
+                        <li><a href="shop.html?category=new">New Arrivals</a></li>
+                        <li><a href="shop.html?category=women">Women</a></li>
+                        <li><a href="shop.html?category=men">Men</a></li>
+                        <li><a href="shop.html?category=sale">Sale</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="#">Shipping & Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Newsletter</h3>
+                    <p style="color: #aaa; margin-bottom: 1rem; font-size: 0.9rem;">Subscribe to receive updates, access to exclusive deals, and more.</p>
+                    <form style="display: flex; gap: 0.5rem;" onsubmit="event.preventDefault(); alert('Subscribed!');">
+                        <input type="email" placeholder="Enter your email" required style="padding: 0.5rem; width: 100%; border: none; border-radius: 4px;">
+                        <button type="submit" class="btn btn-primary" style="padding: 0.5rem 1rem; background-color: var(--color-secondary); color: var(--color-primary); font-weight: bold; border-radius: 4px;">Subscribe</button>
+                    </form>
+                    <div class="social-links" style="margin-top: 1.5rem;">
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-pinterest"></i></a>
+                        <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 Odera Clothing. All rights reserved. Designed with style.
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Gallery logic
+        function changeImage(src) {
+            document.getElementById('mainImage').src = src;
+            const thumbs = document.querySelectorAll('.thumbnail');
+            thumbs.forEach(thumb => {
+                if(thumb.src === src) thumb.classList.add('active');
+                else thumb.classList.remove('active');
+            });
+        }
+
+        // Tabs logic
+        function openTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Size & Color selection logic
+        document.querySelectorAll('.size-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        document.querySelectorAll('.color-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Wishlist Large Button
+        const wishlistLg = document.querySelector('.wishlist-btn-large');
+        if(wishlistLg) {
+            wishlistLg.addEventListener('click', (e) => {
+                wishlistLg.classList.toggle('active');
+                const i = wishlistLg.querySelector('i');
+                if(wishlistLg.classList.contains('active')) {
+                    i.classList.remove('fa-regular');
+                    i.classList.add('fa-solid');
+                } else {
+                    i.classList.remove('fa-solid');
+                    i.classList.add('fa-regular');
+                }
+            });
+        }
+        
+        // Add to cart large
+        const addToCartLg = document.querySelector('.btn-add-cart-large');
+        if(addToCartLg) {
+            addToCartLg.addEventListener('click', () => {
+                const originalText = addToCartLg.textContent;
+                addToCartLg.textContent = 'Adding...';
+                setTimeout(() => {
+                    addToCartLg.textContent = 'Added to Cart!';
+                    addToCartLg.style.backgroundColor = 'var(--color-accent)';
+                    
+                    const cartCountEl = document.querySelector('.cart-count');
+                    if(cartCountEl) {
+                        let count = parseInt(cartCountEl.textContent || '0');
+                        cartCountEl.textContent = count + 1;
+                    }
+                    
+                    setTimeout(() => {
+                        addToCartLg.textContent = originalText;
+                        addToCartLg.style.backgroundColor = '';
+                    }, 2000);
+                }, 500);
+            });
+        }
+    </script>
+</body>
+</html>
+
